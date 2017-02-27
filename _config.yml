@@ -70,12 +70,12 @@ theme: landscape
 deploy:
   type: git
   repository: git@github.com:humorless/humorless.github.io.git
-  branch: gh-pages
+  branch: master
 
 backup:
   type: git
   repository: 
-    github: git@github.com:humorless/humorless.github.io.git,master
+    github: git@github.com:humorless/humorless.github.io.git,backup
 
 # standard markdown
 marked:
@@ -87,11 +87,15 @@ marked:
     smartLists: false
     smartypants: false
 
+plugin:
+- hexo-generator-feed
+- hexo-generator-sitemap
+
 #Feed Atom
 feed:
-    type: atom
-    path: atom.xml
-    limit: 20
+  type: atom
+  path: atom.xml
+  limit: 20
 
 # sitemap
 sitemap:
