@@ -12,8 +12,8 @@ timezone: Asia/Taipei
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://humorless.github.io/blog
-root: /blog/
+url: http://humorless.github.io
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -69,13 +69,13 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:humorless/blog.git
+  repository: git@github.com:humorless/humorless.github.io.git
   branch: gh-pages
 
 backup:
   type: git
   repository: 
-    github: git@github.com:humorless/blog.git,master
+    github: git@github.com:humorless/humorless.github.io.git,master
 
 # standard markdown
 marked:
