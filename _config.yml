@@ -7,7 +7,7 @@ title: 議會多樹、不再少樹
 subtitle: 關於我 https://github.com/treesparty
 description:
 author: Laurence Chen
-language: zh-tw
+language: en
 timezone: Asia/Taipei
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: aero-dual
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
