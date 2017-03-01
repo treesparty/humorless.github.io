@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>議會多樹、不再少樹</title>
+  <subtitle>關於我 https://github.com/treesparty</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://treesparty.github.io/"/>
+  <updated>2017-03-01T16:19:41.011Z</updated>
+  <id>http://treesparty.github.io/</id>
+  
+  <author>
+    <name>Laurence Chen</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pattern</title>
+    <link href="http://treesparty.github.io/2017/02/28/pattern/"/>
+    <id>http://treesparty.github.io/2017/02/28/pattern/</id>
+    <published>2017-02-28T00:12:30.000Z</published>
+    <updated>2017-03-01T16:19:41.011Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="patterns-programming-with-abstactions-that-are-not-powerful-enough"><a href="#patterns-programming-with-abstactions-that-are-not-powerful-enough" class="headerlink" title="patterns = programming with abstactions that are not powerful enough"></a>patterns = programming with abstactions that are not powerful enough</h2><p>先來引述一下 Paul Graham 的句子
+<blockquote><p>When I see patterns in my programs, I consider it a sign of trouble. The shape of a program should reflect only the problem it needs to solve. Any other regularity in the code is a sign, to me at least, that I&#39;m using abstractions that aren&#39;t powerful enough.</p>
+<footer><strong>Paul Graham</strong><cite>Revenge of the Nerds</cite></footer></blockquote></p>
+<p>為了想出可以妥善解釋這段話的意思的 non-trivial 範例，其實我還想了滿久的。不料真的就在我學習 clojure 語言的過程之中找到了。這個範例是對某個 array 的每一個元素，做相同的運算處理：一個是循序處理、一個是平行處理。</p>
+<h3 id="golang-的兩個版本"><a href="#golang-的兩個版本" class="headerlink" title="golang 的兩個版本"></a>golang 的兩個版本</h3><p>循序處理的版本
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">res := <span class="built_in">make</span>([]float, N);</div><div class="line"><span class="keyword">for</span> i,xi := <span class="keyword">range</span> data &#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="params">(i <span class="keyword">int</span>, xi float)</span></span> &#123;</div><div class="line">        res[i] = doSomething(i,xi);</div><div class="line">    &#125; (i, xi);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>平行處理的版本
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> empty &#123;&#125;</div><div class="line">...</div><div class="line">data := <span class="built_in">make</span>([]float, N);</div><div class="line">res := <span class="built_in">make</span>([]float, N);</div><div class="line">sem := <span class="built_in">make</span>(<span class="keyword">chan</span> empty, N);  <span class="comment">// semaphore pattern</span></div><div class="line">...</div><div class="line"><span class="keyword">for</span> i,xi := <span class="keyword">range</span> data &#123;</div><div class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span> <span class="params">(i <span class="keyword">int</span>, xi float)</span></span> &#123;</div><div class="line">        res[i] = doSomething(i,xi);</div><div class="line">        sem &lt;- empty&#123;&#125;;</div><div class="line">    &#125; (i, xi);</div><div class="line">&#125;</div><div class="line"><span class="comment">// wait for goroutines to finish</span></div><div class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; N; ++i &#123; &lt;-sem &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="clojure-的兩個版本"><a href="#clojure-的兩個版本" class="headerlink" title="clojure 的兩個版本"></a>clojure 的兩個版本</h3><p>循序處理的版本
+<figure class="highlight clj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> myfun [coll]</div><div class="line">  (<span class="name"><span class="builtin-name">map</span></span> doSomething coll))</div></pre></td></tr></table></figure></p>
+<p>平行處理的版本</p>
+<figure class="highlight clj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> myfun [coll]</div><div class="line">  (<span class="name">pmap</span> doSomething coll))</div></pre></td></tr></table></figure>
+<h3 id="抽象層次的差異"><a href="#抽象層次的差異" class="headerlink" title="抽象層次的差異"></a>抽象層次的差異</h3><p>比較這兩種語言寫的四段程式碼，很快可以發現，循序處理的範例都相當的簡單。然而，當換成平行處理的版本時， golang 的實作比 clojure 難多了。需要用 golang 的 channel 做出一個 semaphore 的 pattern 才能實現。而相較之下， clojure 把 map 換成 pmap 就可以了。由此可見， clojure 在這個例子之中，是一種足夠強的抽象層，可以輕易地去表達這個平行處理的語意。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;patterns-programming-with-abstactions-that-are-not-powerful-enough&quot;&gt;&lt;a href=&quot;#patterns-programming-with-abstactions-that-are-not-pow
+    
+    </summary>
+    
+    
+      <category term="golang" scheme="http://treesparty.github.io/tags/golang/"/>
+    
+      <category term="clojure" scheme="http://treesparty.github.io/tags/clojure/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>migrate</title>
+    <link href="http://treesparty.github.io/2017/02/27/migrate/"/>
+    <id>http://treesparty.github.io/2017/02/27/migrate/</id>
+    <published>2017-02-27T03:23:02.000Z</published>
+    <updated>2017-03-01T16:19:41.011Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="更換-blog-平台"><a href="#更換-blog-平台" class="headerlink" title="更換 blog 平台"></a>更換 blog 平台</h3><p>最近寫的技術文章愈來愈多都是有必要直接呈現程式碼。用 gist 的話，等於是把程式碼放在一個外部的空間來存放。總之，我覺得舊版的<a href="http://irongateinfo.blogspot.tw/" target="_blank" rel="external">技術blog</a> 用的 blogspot 雖然簡單好用，但是我是 blog 的重度使用者。我需要 markdown 來輔助。</p>
+<p>候選的選項就是 octopress, hexo 。據說 node.js 的速度會比 Ruby 還快一些，那就用 <a href="https://hexo.io/zh-tw/" target="_blank" rel="external">hexo</a> 吧。</p>
+<p>用 hexo 這種 blog 平台，最關鍵的問題就是備份了：我也找了一個用來處理 hexo 備份問題的<a href="https://github.com/coneycode/hexo-git-backup" target="_blank" rel="external">插件</a>，如此的話要在不同的電腦編輯也沒有問題了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;更換-blog-平台&quot;&gt;&lt;a href=&quot;#更換-blog-平台&quot; class=&quot;headerlink&quot; title=&quot;更換 blog 平台&quot;&gt;&lt;/a&gt;更換 blog 平台&lt;/h3&gt;&lt;p&gt;最近寫的技術文章愈來愈多都是有必要直接呈現程式碼。用 gist 的話，等於是
+    
+    </summary>
+    
+    
+      <category term="diary" scheme="http://treesparty.github.io/tags/diary/"/>
+    
+  </entry>
+  
+</feed>
