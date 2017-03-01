@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 程式人蔘
-subtitle: 關於我 https://github.com/humorless
+title: 議會多樹、不再少樹
+subtitle: 關於我 https://github.com/treesparty
 description:
 author: Laurence Chen
 language: zh-tw
@@ -69,13 +69,13 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:treesparty/treesparty.github.io.git
+  repository: https://github.com/treesparty/treesparty.github.io.git
   branch: master
 
 backup:
   type: git
   repository: 
-    github: git@github.com:treesparty/treesparty.github.io.git,backup
+    github: https://github.com/treesparty/treesparty.github.io.git,backup
 
 # standard markdown
 marked:
