@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 議會多樹、不再少樹
+title: 議會多樹 -- 樹黨
 subtitle: 關於我 https://github.com/treesparty
 description:
-author: Laurence Chen
+author:
 language: en
 timezone: Asia/Taipei
 
@@ -28,7 +28,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year-:month-:day-:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab

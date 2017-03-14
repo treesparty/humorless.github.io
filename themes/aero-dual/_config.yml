@@ -1,9 +1,10 @@
 # Header Menu
 menu:
   Home: /
+  關於樹黨: /about
+  政策綱領: /position        
   Archives: /archives
   # change github and email values to your own addresses
-  Github: https://github.com/treesparty
   Email: mailto:treesparty2014@gmail.com
 rss: /atom.xml
 
