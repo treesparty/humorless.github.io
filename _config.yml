@@ -69,13 +69,13 @@ theme: aero-dual
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/treesparty/treesparty.github.io.git
+  repository: git@github.com:treesparty/treesparty.github.io.git
   branch: master
 
 backup:
   type: git
   repository: 
-    github: https://github.com/treesparty/treesparty.github.io.git,backup
+    github: git@github.com:treesparty/treesparty.github.io.git,backup
 
 # standard markdown
 marked:
