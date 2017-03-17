@@ -1,11 +1,11 @@
 # Header Menu
 menu:
-  Home: /
+  首頁: /
   關於樹黨: /about
   政策綱領: /position        
-  Archives: /archives
+  最新消息: /archives
   # change github and email values to your own addresses
-  Email: mailto:treesparty2014@gmail.com
+  連絡我們: /contact
 rss: /atom.xml
 
 # Set to false to disable banner
