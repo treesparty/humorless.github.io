@@ -28,7 +28,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :year-:month-:day-:title.md # File name of new posts
+new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
@@ -82,7 +82,7 @@ marked:
     gfm: true
     pedantic: false
     sanitize: false
-    tables: false
+    tables: true
     breaks: false
     smartLists: false
     smartypants: false

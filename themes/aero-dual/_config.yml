@@ -5,7 +5,9 @@ menu:
   政策綱領: /position        
   最新消息: /archives
   # change github and email values to your own addresses
+  捐款支持: /donate
   連絡我們: /contact
+
 rss: /atom.xml
 
 # Set to false to disable banner

@@ -3,12 +3,9 @@ title: 關於樹黨
 date: 2017-03-14 16:09:22
 ---
 
-[中執評委名單](../committe/index.html)  
-[入黨辦法](../enter/index.html)  
-[樹黨候選人之提名辦法暨權利義務規定](../candidate/index.html)  
-[樹黨獎懲辦法](../reward/index.html)  
-[樹黨黨章](../contract/index.html)  
-
-樹黨成立於2014年8月10日，是台灣第259個政黨。凝聚了護樹環保、動物保護、青年參政等公民行動的參與者。是太陽花公民運動所孕育的新生草根政治力量。
-
-在2014年的地方大選，於全國各地共推出20名候選人，參選縣市議員、鎮長、市民代表、里長，搶占政治席次的關鍵位置來撐起地球，從草根翻轉台灣，開創環境永續、尊重生命、世代正義、公民參與的彩虹未來。
+* [中執評委名單](../committe/index.html)  
+* [入黨辦法](../enter/index.html)  
+* [樹黨候選人之提名辦法暨權利義務規定](../candidate/index.html)  
+* [樹黨獎懲辦法](../reward/index.html)  
+* [樹黨黨章](../contract/index.html)  
+* [維基百科對樹黨的描述](https://zh.wikipedia.org/wiki/%E6%A8%B9%E9%BB%A8)
