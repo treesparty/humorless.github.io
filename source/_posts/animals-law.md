@@ -5,7 +5,8 @@ tags: [動物福利, 國會遊說, 修法]
 categories: 修法
 excerpt: 樹黨李建明參與推動「動保法修法」
 ---
-
+樹黨李建明參與推動「動保法修法」
+<!-- more -->
 [原始新聞連結](http://www.tanews.org.tw/info/10265)
 記者 李娉婷/報導
 
