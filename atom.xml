@@ -1,75 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>議會多樹、不再少樹</title>
-  <subtitle>關於我 https://github.com/treesparty</subtitle>
+  <title>樹黨</title>
+  <subtitle>議會多樹、不再少樹</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://treesparty.github.io/"/>
-  <updated>2017-03-01T16:19:41.011Z</updated>
+  <updated>2017-04-12T20:06:13.300Z</updated>
   <id>http://treesparty.github.io/</id>
-  
-  <author>
-    <name>Laurence Chen</name>
-    
-  </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>pattern</title>
-    <link href="http://treesparty.github.io/2017/02/28/pattern/"/>
-    <id>http://treesparty.github.io/2017/02/28/pattern/</id>
-    <published>2017-02-28T00:12:30.000Z</published>
-    <updated>2017-03-01T16:19:41.011Z</updated>
+    <title>動保法修正三讀 殺傷害動物刑責提高</title>
+    <link href="http://treesparty.github.io/2017/04/12/penalties/"/>
+    <id>http://treesparty.github.io/2017/04/12/penalties/</id>
+    <published>2017-04-12T11:57:49.000Z</published>
+    <updated>2017-04-12T20:06:13.300Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="patterns-programming-with-abstactions-that-are-not-powerful-enough"><a href="#patterns-programming-with-abstactions-that-are-not-powerful-enough" class="headerlink" title="patterns = programming with abstactions that are not powerful enough"></a>patterns = programming with abstactions that are not powerful enough</h2><p>先來引述一下 Paul Graham 的句子
-<blockquote><p>When I see patterns in my programs, I consider it a sign of trouble. The shape of a program should reflect only the problem it needs to solve. Any other regularity in the code is a sign, to me at least, that I&#39;m using abstractions that aren&#39;t powerful enough.</p>
-<footer><strong>Paul Graham</strong><cite>Revenge of the Nerds</cite></footer></blockquote></p>
-<p>為了想出可以妥善解釋這段話的意思的 non-trivial 範例，其實我還想了滿久的。不料真的就在我學習 clojure 語言的過程之中找到了。這個範例是對某個 array 的每一個元素，做相同的運算處理：一個是循序處理、一個是平行處理。</p>
-<h3 id="golang-的兩個版本"><a href="#golang-的兩個版本" class="headerlink" title="golang 的兩個版本"></a>golang 的兩個版本</h3><p>循序處理的版本
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">res := <span class="built_in">make</span>([]float, N);</div><div class="line"><span class="keyword">for</span> i,xi := <span class="keyword">range</span> data &#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="params">(i <span class="keyword">int</span>, xi float)</span></span> &#123;</div><div class="line">        res[i] = doSomething(i,xi);</div><div class="line">    &#125; (i, xi);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>平行處理的版本
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> empty &#123;&#125;</div><div class="line">...</div><div class="line">data := <span class="built_in">make</span>([]float, N);</div><div class="line">res := <span class="built_in">make</span>([]float, N);</div><div class="line">sem := <span class="built_in">make</span>(<span class="keyword">chan</span> empty, N);  <span class="comment">// semaphore pattern</span></div><div class="line">...</div><div class="line"><span class="keyword">for</span> i,xi := <span class="keyword">range</span> data &#123;</div><div class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span> <span class="params">(i <span class="keyword">int</span>, xi float)</span></span> &#123;</div><div class="line">        res[i] = doSomething(i,xi);</div><div class="line">        sem &lt;- empty&#123;&#125;;</div><div class="line">    &#125; (i, xi);</div><div class="line">&#125;</div><div class="line"><span class="comment">// wait for goroutines to finish</span></div><div class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; N; ++i &#123; &lt;-sem &#125;</div></pre></td></tr></table></figure></p>
-<h3 id="clojure-的兩個版本"><a href="#clojure-的兩個版本" class="headerlink" title="clojure 的兩個版本"></a>clojure 的兩個版本</h3><p>循序處理的版本
-<figure class="highlight clj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> myfun [coll]</div><div class="line">  (<span class="name"><span class="builtin-name">map</span></span> doSomething coll))</div></pre></td></tr></table></figure></p>
-<p>平行處理的版本</p>
-<figure class="highlight clj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> myfun [coll]</div><div class="line">  (<span class="name">pmap</span> doSomething coll))</div></pre></td></tr></table></figure>
-<h3 id="抽象層次的差異"><a href="#抽象層次的差異" class="headerlink" title="抽象層次的差異"></a>抽象層次的差異</h3><p>比較這兩種語言寫的四段程式碼，很快可以發現，循序處理的範例都相當的簡單。然而，當換成平行處理的版本時， golang 的實作比 clojure 難多了。需要用 golang 的 channel 做出一個 semaphore 的 pattern 才能實現。而相較之下， clojure 把 map 換成 pmap 就可以了。由此可見， clojure 在這個例子之中，是一種足夠強的抽象層，可以輕易地去表達這個平行處理的語意。</p>
+    <content type="html"><![CDATA[<p><a href="http://news.pts.org.tw/article/355254" target="_blank" rel="external">原始新聞連結</a></p>
+<p>虐貓虐狗事件頻傳，立法院三讀通過，將來故意殺害、傷害動物的刑責，從一年以下有期徒刑，提高到兩年以下；另外，修法之後，飼主也不得以汽機車牽引寵物，也不能吃貓肉、狗肉</p>
+<p>將飼料放在碟子上餵食流浪貓，眼前法籍女士王嫻如，就是台大僑生陳皓揚虐殺流浪貓「大橘子」的報案人。十年來，王嫻如不停歇地前來照護流浪動物，聽聞動保法修正通過，加重故意殺害、傷害動物刑責，從原本的一年以下有期徒刑，提高至兩年以下，王嫻如又驚又喜。</p>
+<blockquote>
+<p>==流浪動物愛心媽媽 王嫻如==<br>終於 終於有一個工具<br>的確我們愛心媽媽<br>（只能)在馬路上面<br>有的時候在法律上面<br>我們沒有辦法管<br>可是現在有法律(加重刑責)<br>我們不可以說沒有<br>不可以說警察先生沒有用<br>法律沒有用  </p>
+</blockquote>
+<p>台大僑生陳皓揚接連虐貓案，引起公憤，一審陳皓揚被判刑10個月、併科罰金35萬元，但若是依照新法，可能會因為累犯被判三年有期徒刑。推動修法的民間團體表示，過去八年間，虐待動物案件有上百多件，卻只有一件入監服刑，所以刑責有提高的必要。</p>
+<blockquote>
+<p>==樹人會秘書長 潘翰疆==<br>（往例)大概就是<br>最多判到三 四個月<br>最少大概都是<br>三 五十天為大宗<br>那等於說大概<br>大概如果說<br>一天易科一千塊的話<br>一個月大概 
+一、兩個月大概就是<br>（易科)三萬 六萬<br>就可以了事  </p>
+</blockquote>
+<p>立院11號三讀通過動保法修正草案，提高故意殺害動物者刑責，併科罰金也提高至20到200萬元，針對累犯者，處一年以上五年以下有期徒刑，併科50到500萬元罰金；此外，飼主未來也不能以汽機車牽引動物遛貓、遛狗。</p>
+<blockquote>
+<p>==農委會畜牧處動保科科長 江文全==<br>飼主沒有考慮到<br>動物的一些狀況<br>有些變成在牽引過程中<br>有點半拖半拉的方式<br>在做一個行進  </p>
+</blockquote>
+<p>而修正法案也新增對「食用者」的處罰，不只宰殺、販售要罰，未來貓肉、狗肉和內臟，也被禁止購買、食用，且不得持有屠體。讓台灣的動物保護法令，再往前邁進一步。</p>
+<p>記者 黃怡菁 郭俊麟 台北報導</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;patterns-programming-with-abstactions-that-are-not-powerful-enough&quot;&gt;&lt;a href=&quot;#patterns-programming-with-abstactions-that-are-not-pow
+      &lt;p&gt;&lt;a href=&quot;http://news.pts.org.tw/article/355254&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原始新聞連結&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;虐貓虐狗事件頻傳，立法院三讀通過，將來故意殺害、傷害動物的刑責，從一年以下有期徒
     
     </summary>
     
+      <category term="遊說修法" scheme="http://treesparty.github.io/categories/%E9%81%8A%E8%AA%AA%E4%BF%AE%E6%B3%95/"/>
     
-      <category term="golang" scheme="http://treesparty.github.io/tags/golang/"/>
     
-      <category term="clojure" scheme="http://treesparty.github.io/tags/clojure/"/>
+      <category term="動保法" scheme="http://treesparty.github.io/tags/%E5%8B%95%E4%BF%9D%E6%B3%95/"/>
+    
+      <category term="刑責" scheme="http://treesparty.github.io/tags/%E5%88%91%E8%B2%AC/"/>
     
   </entry>
   
   <entry>
-    <title>migrate</title>
-    <link href="http://treesparty.github.io/2017/02/27/migrate/"/>
-    <id>http://treesparty.github.io/2017/02/27/migrate/</id>
-    <published>2017-02-27T03:23:02.000Z</published>
-    <updated>2017-03-01T16:19:41.011Z</updated>
+    <title>柏油路上能種樹？　 澎縣府裝個樣子引熱議</title>
+    <link href="http://treesparty.github.io/2017/03/14/penghu-asphalt-trees/"/>
+    <id>http://treesparty.github.io/2017/03/14/penghu-asphalt-trees/</id>
+    <published>2017-03-14T02:41:23.000Z</published>
+    <updated>2017-04-12T20:03:24.888Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="更換-blog-平台"><a href="#更換-blog-平台" class="headerlink" title="更換 blog 平台"></a>更換 blog 平台</h3><p>最近寫的技術文章愈來愈多都是有必要直接呈現程式碼。用 gist 的話，等於是把程式碼放在一個外部的空間來存放。總之，我覺得舊版的<a href="http://irongateinfo.blogspot.tw/" target="_blank" rel="external">技術blog</a> 用的 blogspot 雖然簡單好用，但是我是 blog 的重度使用者。我需要 markdown 來輔助。</p>
-<p>候選的選項就是 octopress, hexo 。據說 node.js 的速度會比 Ruby 還快一些，那就用 <a href="https://hexo.io/zh-tw/" target="_blank" rel="external">hexo</a> 吧。</p>
-<p>用 hexo 這種 blog 平台，最關鍵的問題就是備份了：我也找了一個用來處理 hexo 備份問題的<a href="https://github.com/coneycode/hexo-git-backup" target="_blank" rel="external">插件</a>，如此的話要在不同的電腦編輯也沒有問題了。</p>
+    <content type="html"><![CDATA[<p><a href="http://www.appledaily.com.tw/realtimenews/article/new/20170313/1075583/" target="_blank" rel="external">原始新聞連結</a>
+<img src="./penghu.png" alt="英文報導">
+為了達成建管法令的綠覆地規定，澎縣府昨日被民眾發現，竟在馬公市中心區新建完工的公共車船管理處馬公總站客運轉運中心前的柏油路上，直接放土插上樹苗；此舉讓網友譏諷澎縣府種樹沒有極限，「合理的植樹是訓練，不合理的植樹是磨練」、「官員怎麼不也在柏油路上種腦子，看能不能長出些智商來。」</p>
+<p>樹黨主席冼義哲火大批說，實在看不出這是什麼創意，要求澎縣府出面解釋。他說，綠地面積的規定就是要真綠地，此舉無異帶頭違法；為取得使用執照，這樣虛應故事根本藐視當初立法的精神，甚至很可能構成詐欺。</p>
+<p>網友邱柏瑋就認真留言說，樹穴留不夠，不是長不大就死了，就是浮根鑽壞馬路，再不然就是長大了，但最後
+抓地力不夠在某次颱風倒下。澎湖縣政府顧問郁國麟則直接點出，這就是為取得使用執照而擺擺樣子，使照拿到就撤走。</p>
+<p><img src="./trees.jpg" alt="原始圖片">
+郁國麟強調，建管法規太僵硬，上有政策就下有對策，此事件純屬申請使用執照錯誤之方式，民間案件只要擺盆景就可以，但這車站又是車道，搞這明堂實在沒必要，澎縣府工務處和建設處協調出問題，都要檢討。</p>
+<p>澎湖縣政府工務處處長蔡淇賢表示，這是當初申請建築執照時，建築師依照建築法令必須劃設一定的綠覆地面積，所以暫時放上幾棵樹，來做建管發放使用執照時的驗收檢查用。只是這綠覆地區將來是要停放公車，今天將會和建管單位討論，看可否改以植草磚等方式替代？（許逸民／澎湖報導）</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;更換-blog-平台&quot;&gt;&lt;a href=&quot;#更換-blog-平台&quot; class=&quot;headerlink&quot; title=&quot;更換 blog 平台&quot;&gt;&lt;/a&gt;更換 blog 平台&lt;/h3&gt;&lt;p&gt;最近寫的技術文章愈來愈多都是有必要直接呈現程式碼。用 gist 的話，等於是
+      &lt;p&gt;&lt;a href=&quot;http://www.appledaily.com.tw/realtimenews/article/new/20170313/1075583/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原始新聞連結&lt;/a&gt;
+&lt;img src=&quot;./p
     
     </summary>
     
+      <category term="揭弊" scheme="http://treesparty.github.io/categories/%E6%8F%AD%E5%BC%8A/"/>
     
-      <category term="diary" scheme="http://treesparty.github.io/tags/diary/"/>
+    
+      <category term="澎湖" scheme="http://treesparty.github.io/tags/%E6%BE%8E%E6%B9%96/"/>
+    
+      <category term="柏油路" scheme="http://treesparty.github.io/tags/%E6%9F%8F%E6%B2%B9%E8%B7%AF/"/>
+    
+      <category term="種樹" scheme="http://treesparty.github.io/tags/%E7%A8%AE%E6%A8%B9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>樹黨對於集集鎮長陳紀衡過度修剪老榕樹之聲明</title>
+    <link href="http://treesparty.github.io/2016/04/22/jijimayor/"/>
+    <id>http://treesparty.github.io/2016/04/22/jijimayor/</id>
+    <published>2016-04-22T01:51:02.000Z</published>
+    <updated>2017-04-02T14:43:01.067Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="./signed.jpg" alt="候選人公約">
+一、陳紀衡因拒絕履行候選人公約，樹黨已開除黨籍。</p>
+<p>樹黨於2014年提名參選的候選人，為向社會大眾承諾公開透明且可課責的政治，以及回饋公民社會之基本價值，全體均依循國際環境政黨之慣例簽署〈候選人公約〉，承諾在選舉中及當選後確實履行公約。各項權利義務均於〈候選人公約〉中規範，候選人簽訂公約之對象實為全體公民、未來世代與地球眾生萬物。<br>由於陳紀衡當選後長期拒絕履行所簽訂之候選人公約，在樹黨與陳紀衡雙方多次溝通協調未竟之際，陳紀衡逕行於2015年06月24日於名間郵局寄出存證信函聲明退黨，中評會於2015年7月6日做出開除黨籍之處分，由於樹黨黨章規定除名須經黨員大會程序，於2016年03月26日召開之年度黨員大會中，正式決議通過開除其黨籍。</p>
+<p><img src="./letter.jpg" alt="存証信函">
+二、集集鎮多次過度修剪樹木，確實傷害生態與地方集體記憶，並危及觀光產業發展。</p>
+<p>捍衛樹木與地球母親之權利，免於人類貪婪與無知所侵害，乃揭櫫於樹黨黨章之重要核心價值、宗旨與任務，長期以來樹黨及成員持續在各地揭發樹木之不當修剪與不當移植，絲毫不敢懈怠，特別重視透過政治途徑、官方部門，加以改善樹木與萬物棲息之生態環境。<br>茂盛的森林樹木乃集集重要的觀光資源，也是地方居民集體的記憶，陳紀衡在選舉期間，亦直接以行動保護集集綠色隧道及最老大樹公的棲地改善，實踐樹木保護等核心價值。然而上任後集集鎮公所卻多次發生過度修剪事件，集集鎮公所此次在八張街往台16線聯外道路兩旁十多棵茂密老榕樹之過度修剪，陳紀衡更假託老樹竄根、腐爛壓毀遊覽車與颱風危險之藉口，其說詞與行為與無異於各地環境破壞者。</p>
+<p><img src="./treesphoto.jpg" alt="照片">
+三、樹黨全體對於集集鎮民、全體國人、地球母親之傷害，深切反省並鄭重公開道歉！</p>
+<p>面對集集鎮長陳紀衡如此嚴重違背核心價值的情節，樹黨中央執行委員會全體決議公開道歉：選前未能審慎把關導致提名錯誤，亦未能約束黨員履行〈候選人公約〉，樹黨必須確切自我反省，應建立制度以避免未來有遺憾再度發生，並對社會表達出自內心最深沉的歉意。<br>同時，樹黨對於初入政治領域之素人工作者的培訓明顯不足，以致傷害公眾對於青年參政的期望。希望社會不要因為單一負面個案，對青年參政失去信心，甚至產生誤解與反挫。<br>我們將密切關注在地情勢變化，一旦持續惡化，本黨將不排除採取更進一步的行動，以亡羊補牢，負起應有的政治責任。  </p>
+<p><em>2016年4月22日 樹黨中央執行委員會</em></p>
+<a id="more"></a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;./signed.jpg&quot; alt=&quot;候選人公約&quot;&gt;
+一、陳紀衡因拒絕履行候選人公約，樹黨已開除黨籍。&lt;/p&gt;
+&lt;p&gt;樹黨於2014年提名參選的候選人，為向社會大眾承諾公開透明且可課責的政治，以及回饋公民社會之基本價值，全體均依循國際環境政黨之慣例簽署〈候選人公約〉，承諾在選舉中及當選後確實履行公約。各項權利義務均於〈候選人公約〉中規範，候選人簽訂公約之對象實為全體公民、未來世代與地球眾生萬物。&lt;br&gt;由於陳紀衡當選後長期拒絕履行所簽訂之候選人公約，在樹黨與陳紀衡雙方多次溝通協調未竟之際，陳紀衡逕行於2015年06月24日於名間郵局寄出存證信函聲明退黨，中評會於2015年7月6日做出開除黨籍之處分，由於樹黨黨章規定除名須經黨員大會程序，於2016年03月26日召開之年度黨員大會中，正式決議通過開除其黨籍。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./letter.jpg&quot; alt=&quot;存証信函&quot;&gt;
+二、集集鎮多次過度修剪樹木，確實傷害生態與地方集體記憶，並危及觀光產業發展。&lt;/p&gt;
+&lt;p&gt;捍衛樹木與地球母親之權利，免於人類貪婪與無知所侵害，乃揭櫫於樹黨黨章之重要核心價值、宗旨與任務，長期以來樹黨及成員持續在各地揭發樹木之不當修剪與不當移植，絲毫不敢懈怠，特別重視透過政治途徑、官方部門，加以改善樹木與萬物棲息之生態環境。&lt;br&gt;茂盛的森林樹木乃集集重要的觀光資源，也是地方居民集體的記憶，陳紀衡在選舉期間，亦直接以行動保護集集綠色隧道及最老大樹公的棲地改善，實踐樹木保護等核心價值。然而上任後集集鎮公所卻多次發生過度修剪事件，集集鎮公所此次在八張街往台16線聯外道路兩旁十多棵茂密老榕樹之過度修剪，陳紀衡更假託老樹竄根、腐爛壓毀遊覽車與颱風危險之藉口，其說詞與行為與無異於各地環境破壞者。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./treesphoto.jpg&quot; alt=&quot;照片&quot;&gt;
+三、樹黨全體對於集集鎮民、全體國人、地球母親之傷害，深切反省並鄭重公開道歉！&lt;/p&gt;
+&lt;p&gt;面對集集鎮長陳紀衡如此嚴重違背核心價值的情節，樹黨中央執行委員會全體決議公開道歉：選前未能審慎把關導致提名錯誤，亦未能約束黨員履行〈候選人公約〉，樹黨必須確切自我反省，應建立制度以避免未來有遺憾再度發生，並對社會表達出自內心最深沉的歉意。&lt;br&gt;同時，樹黨對於初入政治領域之素人工作者的培訓明顯不足，以致傷害公眾對於青年參政的期望。希望社會不要因為單一負面個案，對青年參政失去信心，甚至產生誤解與反挫。&lt;br&gt;我們將密切關注在地情勢變化，一旦持續惡化，本黨將不排除採取更進一步的行動，以亡羊補牢，負起應有的政治責任。  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;2016年4月22日 樹黨中央執行委員會&lt;/em&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="聲明" scheme="http://treesparty.github.io/categories/%E8%81%B2%E6%98%8E/"/>
+    
+    
+      <category term="候選人公約" scheme="http://treesparty.github.io/tags/%E5%80%99%E9%81%B8%E4%BA%BA%E5%85%AC%E7%B4%84/"/>
+    
+      <category term="政治責任" scheme="http://treesparty.github.io/tags/%E6%94%BF%E6%B2%BB%E8%B2%AC%E4%BB%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拒讓虐殺動物用錢解決 動團推修法</title>
+    <link href="http://treesparty.github.io/2016/04/20/animals-law/"/>
+    <id>http://treesparty.github.io/2016/04/20/animals-law/</id>
+    <published>2016-04-20T03:01:02.000Z</published>
+    <updated>2017-04-02T14:43:01.063Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://www.tanews.org.tw/info/10265" target="_blank" rel="external">原始新聞連結</a>
+記者 李娉婷/報導</p>
+<p>為修改《動物保護法》第25條，數十個關心動物保護的單位共同推動的「為毛孩子連署，點燃光明燈」行動，獲得多位立委跨黨派支持，今（20）日在立法院門口召開記者會，宣布行動將聯合香港、澳門兩地的動保團體，在30日於台港澳三地同步舉辦遊行、請願等動保活動，而目標30萬人的連署行動，目前只有5萬人響應，需要更多民眾參與連署，讓修法更加被重視。</p>
+<p><img src="./animals.jpg" alt="連署記者會">
+「為毛孩子連署」團隊成員李建明指出，雖然《動物保護法》在2007年時加入了虐待、傷害動物的刑責，但近年來多起嚴重虐待動物的案件，只有一人是因為繳不出罰金而入監服刑，所有案件的判刑都可易科罰金，此外，樹黨策略長潘翰聲也表示不論犯行嚴重程度，刑度都是1年以下，甚至比毀損器物罪的2年以下還低，相當不合理。</p>
+<p>有鑑於此，「為毛孩子連署」團隊主張《動物保護法》第25條應針對不當飼養（第5條第2項）、虐待傷害動物（第6條）及宰殺犬貓（第12條）制定不同刑度的罰責。</p>
+<p>修法連署記者會獲得親民黨團、國民黨籍立委陳學聖、民進黨籍立委高志鵬、樹黨與草協聯盟發起人徐巧芯親自到場支持，其中徐巧芯表示將會親自參與接下來的連署行動，希望能讓連署盡快破30萬，曾任中華民國保護動物協會理事長的陳學聖、現屬於經濟委員會委員的高志鵬也表示將大力支持修法。</p>
+<p>除了在台灣的修法行動外，李建明表示，團隊也與香港非牟利獸醫服務協會（NPV）、澳門保護遺棄動物協會（AAPAM）串聯，將在30日於兩岸三地同步舉辦動保活動，香港方訴求「收緊法令」，阻止香港政府向私人寵物繁殖發牌證；澳門方則是推動動物保護立法；而台灣主張修改動物保護法第25條，「為毛孩子點燃光明燈」行動將在下午3點於台北市政府、台中市政府前展開，歡迎民眾自行攜帶小蠟燭或LED燈參加。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://www.tanews.org.tw/info/10265&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;原始新聞連結&lt;/a&gt;
+記者 李娉婷/報導&lt;/p&gt;
+&lt;p&gt;為修改《動物保護法》第25條，數十個關心動物保護的單位共同推動的
+    
+    </summary>
+    
+      <category term="修法" scheme="http://treesparty.github.io/categories/%E4%BF%AE%E6%B3%95/"/>
+    
+    
+      <category term="動物福利" scheme="http://treesparty.github.io/tags/%E5%8B%95%E7%89%A9%E7%A6%8F%E5%88%A9/"/>
+    
+      <category term="國會遊說" scheme="http://treesparty.github.io/tags/%E5%9C%8B%E6%9C%83%E9%81%8A%E8%AA%AA/"/>
+    
+      <category term="修法" scheme="http://treesparty.github.io/tags/%E4%BF%AE%E6%B3%95/"/>
     
   </entry>
   
