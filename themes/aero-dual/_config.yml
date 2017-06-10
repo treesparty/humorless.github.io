@@ -5,7 +5,8 @@ menu:
   政策綱領: /position        
   最新消息: /archives
   # change github and email values to your own addresses
-  捐款支持: /donate
+  #
+  # 捐款支持: /donate
   連絡我們: /contact
 
 rss: /atom.xml
@@ -41,5 +42,5 @@ show_count: false
 favicon: /favicon.png
 
 # Google Analytics Tracking ID
-google_analytics:
+google_analytics: UA-97181076-2
 
