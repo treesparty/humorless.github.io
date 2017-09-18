@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://treesparty.github.io/2017/09/18/fired/</loc>
+    
+    <lastmod>2017-09-18T15:24:39.985Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://treesparty.github.io/2017/06/13/green/</loc>
     
     <lastmod>2017-06-13T13:49:06.315Z</lastmod>
@@ -37,20 +44,6 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/reward/index.html</loc>
-    
-    <lastmod>2017-04-12T20:56:51.852Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://treesparty.github.io/position/index.html</loc>
-    
-    <lastmod>2017-04-12T20:56:51.852Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://treesparty.github.io/candidate/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
@@ -65,14 +58,14 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/committe/index.html</loc>
+    <loc>http://treesparty.github.io/foreigner/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/water/index.html</loc>
+    <loc>http://treesparty.github.io/reward/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
     
@@ -86,14 +79,14 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/donate/index.html</loc>
+    <loc>http://treesparty.github.io/water/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/education/index.html</loc>
+    <loc>http://treesparty.github.io/donate/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
     
@@ -114,7 +107,7 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/foreigner/index.html</loc>
+    <loc>http://treesparty.github.io/education/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
     
@@ -128,6 +121,20 @@
   </url>
   
   <url>
+    <loc>http://treesparty.github.io/committe/index.html</loc>
+    
+    <lastmod>2017-04-12T20:56:51.852Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://treesparty.github.io/position/index.html</loc>
+    
+    <lastmod>2017-04-12T20:56:51.852Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://treesparty.github.io/contact/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.852Z</lastmod>
@@ -135,14 +142,14 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/animals/index.html</loc>
+    <loc>http://treesparty.github.io/about/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.844Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/about/index.html</loc>
+    <loc>http://treesparty.github.io/animals/index.html</loc>
     
     <lastmod>2017-04-12T20:56:51.844Z</lastmod>
     
