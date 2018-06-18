@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://treesparty.github.io/2018/06/17/public-money-public-code/</loc>
+    
+    <lastmod>2018-06-18T08:50:31.016Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://treesparty.github.io/2018/05/20/nomination2018/</loc>
     
     <lastmod>2018-05-20T09:19:39.988Z</lastmod>
@@ -37,6 +44,13 @@
   </url>
   
   <url>
+    <loc>http://treesparty.github.io/reward/index.html</loc>
+    
+    <lastmod>2018-05-20T07:49:51.482Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://treesparty.github.io/foreigner/index.html</loc>
     
     <lastmod>2018-05-20T07:49:51.482Z</lastmod>
@@ -65,20 +79,6 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/donate/index.html</loc>
-    
-    <lastmod>2018-05-20T07:49:51.482Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://treesparty.github.io/reward/index.html</loc>
-    
-    <lastmod>2018-05-20T07:49:51.482Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://treesparty.github.io/position/index.html</loc>
     
     <lastmod>2018-05-20T07:49:51.482Z</lastmod>
@@ -86,14 +86,21 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/charter/index.html</loc>
+    <loc>http://treesparty.github.io/donate/index.html</loc>
+    
+    <lastmod>2018-05-20T07:49:51.482Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://treesparty.github.io/candidate/index.html</loc>
     
     <lastmod>2018-05-20T07:49:51.478Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/candidate/index.html</loc>
+    <loc>http://treesparty.github.io/charter/index.html</loc>
     
     <lastmod>2018-05-20T07:49:51.478Z</lastmod>
     
@@ -142,14 +149,14 @@
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/2017/06/13/green/</loc>
+    <loc>http://treesparty.github.io/2017/09/18/fired/</loc>
     
     <lastmod>2018-05-20T07:49:51.458Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://treesparty.github.io/2017/09/18/fired/</loc>
+    <loc>http://treesparty.github.io/2017/06/13/green/</loc>
     
     <lastmod>2018-05-20T07:49:51.458Z</lastmod>
     
