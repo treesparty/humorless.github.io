@@ -1,0 +1,32 @@
+# https://docs.travis-ci.com/user/deployment/pages/
+# https://docs.travis-ci.com/user/reference/xenial/
+# https://docs.travis-ci.com/user/languages/clojure/
+# https://docs.travis-ci.com/user/customizing-the-build/
+
+
+dist: xenial
+language: node_js
+node_js:
+  - 10.0.0
+
+before_install:
+  - npm install -g hexo-cli
+
+install:
+  - npm install
+
+# script - run the build script, generate the web pages
+script:
+  - hexo clean
+  - hexo generate
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  verbose: true
+  keep-history: true
+  local-dir: public
+  target_branch: master  # branch contains blog content
+  on:
+    branch: code  # branch contains Lein generator code
